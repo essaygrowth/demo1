@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+  <title>Bharat Restaurant • Mangaldoi • Authentic Flavours</title>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fefaf6;
+      color: #1e1b18;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :root {
+      --primary: #c62828;
+      --primary-dark: #a01e1e;
+      --gold: #f5b342;
+      --soft-bg: #fffaf5;
+      --card-white: #ffffff;
+      --border-light: #f0dbcf;
+      --shadow-sm: 0 10px 25px -8px rgba(0,0,0,0.06);
+      --shadow-md: 0 15px 30px -10px rgba(0,0,0,0.1);
+      --radius-card: 24px;
+      --radius-btn: 60px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* animations */
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* sticky navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(254, 247, 242, 0.9);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(200, 140, 100, 0.15);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    .logo span {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .logo small { color: var(--primary); }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-weight: 600;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #2e241e;
+      font-size: 0.95rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: white;
+      border: 1px solid #e7cfc0;
+      padding: 10px 14px;
+      border-radius: 40px;
+      font-size: 1.3rem;
+      color: var(--primary);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    /* mobile dropdown navigation */
+.mobile-nav {
+  position: fixed;   /* 🔥 makes it floating */
+  top: 70px;         /* adjust based on navbar height */
+  right: 16px;
+  width: 85%;
+  max-width: 320px;
+
+  display: none;
+  flex-direction: column;
+
+  background: white;
+  padding: 12px 18px;
+  border-radius: 20px;
+
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  border: 1px solid #f5ded0;
+
+  z-index: 999;      /* 🔥 above everything */
+}
+
+.mobile-nav.show {
+      display: flex;
+    }
+    .mobile-nav a {
+      padding: 16px 8px;
+      border-bottom: 1px solid #f0dbcf;
+      font-weight: 600;
+      text-decoration: none;
+      color: #2c1e14;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+    .mobile-nav a i {
+      width: 24px;
+      color: var(--primary);
+    }
+
+    /* carousel */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      border-radius: 28px;
+      overflow: hidden;
+      margin: 16px 0 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      color: white;
+      text-shadow: 0 2px 10px black;
+    }
+    .carousel-slide h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #ccc;
+      border-radius: 20px;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .dot.active {
+      background: var(--primary);
+      width: 24px;
+    }
+
+    /* sections */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 36px 0 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .info-card {
+      background: var(--card-white);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+
+    .service-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .chip {
+      background: #f7e8de;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+
+    /* menu filter */
+    .filter-bar {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      background: white;
+      border: 1px solid #e7cfc0;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .menu-card {
+      background: white;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s;
+    }
+    .menu-card:active { transform: scale(0.98); }
+    .menu-img {
+      width: 100%;
+      height: 100px;
+      border-radius: 16px;
+      background-size: cover;
+      margin-bottom: 10px;
+    }
+    .menu-price {
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 6px;
+    }
+
+    /* about & reviews */
+    .about-text {
+      background: #fcf2ea;
+      padding: 24px;
+      border-radius: 28px;
+      margin: 20px 0;
+    }
+
+    .review-card {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* map */
+    .map-container {
+      border-radius: 28px;
+      overflow: hidden;
+      margin: 20px 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* floating whatsapp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+      z-index: 200;
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.05);
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: block; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 601px) {
+      .container { max-width: 700px; }
+      .mobile-nav { display: none !important; } /* hide mobile nav on desktop */
+    }
+
+    /* utility */
+    .text-center { text-align: center; }
+  </style>
+</head>
+<body>
+<div class="container">
+  
+  <!-- Sticky Navigation -->
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-utensils"></i>
+      <span>BHARAT <small>RESTAURANT</small></span>
+    </div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <!-- Mobile dropdown navigation (fixed toggle) -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#home"><i class="fas fa-home"></i> Home</a>
+    <a href="#menu"><i class="fas fa-utensil-spoon"></i> Menu</a>
+    <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+    <a href="#reviews"><i class="fas fa-star"></i> Reviews</a>
+    <a href="#contact"><i class="fas fa-phone-alt"></i> Contact</a>
+  </div>
+
+  <!-- Auto-sliding banner carousel -->
+  <div id="home"></div>
+  <div class="carousel-container">
+    <div class="carousel-slides" id="carouselSlides">
+      <div class="carousel-slide" style="background-image: linear-gradient(0deg, #00000070, transparent), url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800');">
+        <h3>Authentic North Indian<br>& Chinese</h3>
+      </div>
+      <div class="carousel-slide" style="background-image: linear-gradient(0deg, #00000070, transparent), url('https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=800');">
+        <h3>Chicken Pulao · Rolls<br>Momos</h3>
+      </div>
+      <div class="carousel-slide" style="background-image: linear-gradient(0deg, #00000070, transparent), url('https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&w=800');">
+        <h3>Roti · Curry · Biryani</h3>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+
+  <!-- Restaurant Overview (info card) -->
+  <div class="info-card">
+    <div class="rating-row">
+      <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.8</span>
+      <span>(346 reviews) · ₹1–200 per person</span>
+    </div>
+    <div class="service-chips">
+      <span class="chip"><i class="fas fa-utensils"></i> Dine-in</span>
+      <span class="chip"><i class="fas fa-shopping-bag"></i> Takeaway</span>
+      <span class="chip"><i class="fas fa-box"></i> No-contact delivery</span>
+    </div>
+    <p><i class="fas fa-map-pin" style="color:var(--primary);"></i> Bhebharghat, Darrang Sadar, Ward 10, Mangaldoi, Guwahati</p>
+    <p><i class="fas fa-phone-alt"></i> 070869 85660  ·  C2QC+GP Mangaldoi</p>
+    <p><span style="background:#1f7a3e; color:white; padding:4px 16px; border-radius:40px;">Open · Closes 10 pm</span> <span style="margin-left:10px;">Bohag Bihu may affect hours</span></p>
+  </div>
+
+  <!-- MENU section -->
+  <div id="menu"></div>
+  <h2 class="section-title">📋 Menu & Highlights</h2>
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-btn active" data-cat="all">All</div>
+    <div class="filter-btn" data-cat="starters">Starters</div>
+    <div class="filter-btn" data-cat="main">Main Course</div>
+    <div class="filter-btn" data-cat="rice">Rice & Pulao</div>
+    <div class="filter-btn" data-cat="noodles">Noodles</div>
+    <div class="filter-btn" data-cat="breads">Breads</div>
+    <div class="filter-btn" data-cat="rolls">Rolls/Momos</div>
+  </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
+
+  <!-- ABOUT description -->
+  <div id="about"></div>
+  <h2 class="section-title">🍽️ About Bharat Restaurant</h2>
+  <div class="about-text">
+    <p><strong>Bharat Restaurant</strong> – a beloved dining spot in Mangaldoi, Assam. Known for clean, quality food at reasonable prices with friendly staff. We serve North Indian, Chinese, Rolls, Momos, and street food delights. Perfect for family outings, quick bites, or no-contact delivery.</p>
+    <p style="margin-top:16px;"><i class="fas fa-check-circle" style="color:var(--primary);"></i> Dine-in · Takeaway · Delivery only (no seating available for delivery orders)</p>
+    <p><i class="fas fa-clock"></i> Open for breakfast, lunch, dinner. Average cost ₹200 for one.</p>
+    <p><i class="fas fa-tag"></i> Popular: Chicken Pulao, Kadai Paneer, Chicken Roll, Momos.</p>
+  </div>
+
+  <!-- REVIEWS section -->
+  <div id="reviews"></div>
+  <h2 class="section-title">⭐ Customer Reviews</h2>
+  <div class="review-card">
+    <div style="display:flex; gap:12px;"><i class="fas fa-user-circle" style="font-size:2.5rem; color:#a7582c;"></i> <div><strong>Craftty Tales</strong><br>6 months ago</div></div>
+    <div style="color:var(--gold);">★★★★★</div>
+    <p>“Stopped for lunch on the way to airport. Really good food! Roti sabji, veg fried rice & dry chilly chicken – very tasty.”</p>
+  </div>
+  <div class="review-card">
+    <div style="display:flex; gap:12px;"><i class="fas fa-user-circle" style="font-size:2.5rem; color:#a7582c;"></i> <div><strong>Kristi Das</strong> <span style="background:#e6d5c6; padding:2px 10px; border-radius:30px;">Local Guide</span></div></div>
+    <div style="color:var(--gold);">★★★★★</div>
+    <p>“Food here is quite good. Chicken roll wholesome, can be shared. Chicken fried rice great. Calm place, clean.”</p>
+  </div>
+  <div class="review-card">
+    <div style="display:flex; gap:12px;"><i class="fas fa-user-circle" style="font-size:2.5rem; color:#a7582c;"></i> <div><strong>Rahul S.</strong></div></div>
+    <div style="color:var(--gold);">★★★★☆</div>
+    <p>“Clean, quality food reasonable price. Good staff behaviour. Momos are a must try.”</p>
+    <div style="margin-top:10px;"><span style="background:#f1d5c0; padding:4px 12px; border-radius:30px;">momo</span> <span style="background:#f1d5c0; padding:4px 12px; border-radius:30px;">calm place</span></div>
+  </div>
+
+  <!-- CONTACT & GOOGLE MAP -->
+  <div id="contact"></div>
+  <h2 class="section-title">📍 Contact & Location</h2>
+  <div class="info-card">
+    <p><i class="fas fa-phone-alt"></i> <strong>070869 85660</strong></p>
+    <p><i class="fas fa-map-marker-alt"></i> Bhebharghat, Darrang Sadar, Ward 10, Mangaldoi, Guwahati, Assam 784125</p>
+    <p><i class="fas fa-globe"></i> C2QC+GP Mangaldoi, Assam</p>
+  </div>
+
+  <!-- Google Map embed with provided link -->
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3573.486554329408!2d92.0317!3d26.4499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37446d9a3a5a5a5d%3A0x9f9e8b9a9b9b9b9b!2sBharat%20Restaurant!5e0!3m2!1sen!2sin!4v1715000000000" 
+      width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <p class="text-center" style="margin:10px 0 30px;">
+    <a href="https://maps.app.goo.gl/wLdcyue4ArJpGvUT7" target="_blank" style="background:var(--primary); color:white; padding:14px 28px; border-radius:60px; text-decoration:none; display:inline-block; font-weight:600;">
+      <i class="fas fa-map-marked-alt"></i> Open in Google Maps
+    </a>
+  </p>
+
+  <!-- Footer -->
+  <div style="margin: 20px 0 30px; text-align:center; color:#6b4f3f;">
+    <p>© Bharat Restaurant, Mangaldoi • All rights reserved</p>
+  </div>
+</div>
+
+<!-- Floating WhatsApp button -->
+<a href="https://wa.me/917086985660" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  (function() {
+    // ---------- Mobile menu toggle (FIXED) ----------
+    const toggleBtn = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    function toggleMobileNav(e) {
+      e.stopPropagation();
+      mobileNav.classList.toggle('show');
+    }
+    
+    toggleBtn.addEventListener('click', toggleMobileNav);
+    
+    // Close mobile nav when clicking on a link
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        mobileNav.classList.remove('show');
+      });
+    });
+    
+    // Close mobile nav when clicking outside (optional but good)
+    document.addEventListener('click', function(event) {
+      if (!mobileNav.contains(event.target) && !toggleBtn.contains(event.target) && mobileNav.classList.contains('show')) {
+        mobileNav.classList.remove('show');
+      }
+    });
+
+    // ---------- AUTO SLIDING CAROUSEL ----------
+    const slides = document.querySelectorAll('.carousel-slide');
+    const slidesContainer = document.getElementById('carouselSlides');
+    const dotsContainer = document.getElementById('carouselDots');
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoSlideInterval;
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(index) {
+      currentIndex = index;
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      goToSlide(currentIndex);
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 4000);
+    }
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    startAutoSlide();
+    const carousel = document.querySelector('.carousel-container');
+    carousel.addEventListener('mouseenter', stopAutoSlide);
+    carousel.addEventListener('mouseleave', startAutoSlide);
+    // Pause on touch for better mobile UX
+    carousel.addEventListener('touchstart', stopAutoSlide);
+    carousel.addEventListener('touchend', () => {
+      // restart after a short delay
+      setTimeout(startAutoSlide, 2000);
+    });
+
+    // ---------- MENU DATA ----------
+    const menuItems = [
+      { name: "Chilli Chicken Dry", desc: "Crispy, bold spices", price: "₹180", cat: "starters", veg: false, img: "2338407" },
+      { name: "Chicken Dry Fry", desc: "Crispy spiced chicken", price: "₹190", cat: "starters", veg: false, img: "2338407" },
+      { name: "Kadai Paneer", desc: "Paneer, peppers, onions", price: "₹160", cat: "main", veg: true, img: "1437267" },
+      { name: "Paneer Butter Masala", desc: "Creamy tomato", price: "₹180", cat: "main", veg: true, img: "1437267" },
+      { name: "Chicken Butter Masala", desc: "Tender chicken", price: "₹220", cat: "main", veg: false, img: "2338407" },
+      { name: "Kadai Chicken", desc: "Wok-tossed", price: "₹230", cat: "main", veg: false, img: "2338407" },
+      { name: "Egg Curry (2 Eggs)", desc: "Spiced gravy", price: "₹120", cat: "main", veg: false, img: "2338407" },
+      { name: "Chicken Pulao", desc: "Basmati, chicken", price: "₹170", cat: "rice", veg: false, img: "1279330" },
+      { name: "Veg Pulao", desc: "Fragrant vegetables", price: "₹140", cat: "rice", veg: true, img: "1437267" },
+      { name: "Veg Fried Rice", desc: "Stir-fried veggies", price: "₹130", cat: "rice", veg: true, img: "1437267" },
+      { name: "Chicken Fried Rice", desc: "Tender chicken", price: "₹160", cat: "rice", veg: false, img: "1279330" },
+      { name: "Veg Chowmein", desc: "Noodles, fresh veg", price: "₹120", cat: "noodles", veg: true, img: "1437267" },
+      { name: "Chicken Hakka Noodles", desc: "Chicken & veg", price: "₹170", cat: "noodles", veg: false, img: "2338407" },
+      { name: "Plain Paratha", desc: "Flaky whole wheat", price: "₹30", cat: "breads", veg: true, img: "674574" },
+      { name: "Butter Roti", desc: "Soft, butter", price: "₹20", cat: "breads", veg: true, img: "674574" },
+      { name: "Aloo Paratha", desc: "Spiced potato", price: "₹50", cat: "breads", veg: true, img: "674574" },
+      { name: "Chicken Roll", desc: "Wrap, spiced chicken", price: "₹90", cat: "rolls", veg: false, img: "461198" },
+      { name: "Paneer Roll", desc: "Paneer & veggies", price: "₹80", cat: "rolls", veg: true, img: "461198" },
+      { name: "Chicken Momos (6pcs)", desc: "Steamed dumplings", price: "₹100", cat: "rolls", veg: false, img: "461198" },
+    ];
+
+    const menuGrid = document.getElementById('menuGrid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    function renderMenu(category = 'all') {
+      const filtered = category === 'all' ? menuItems : menuItems.filter(i => i.cat === category);
+      menuGrid.innerHTML = filtered.map(item => `
+        <div class="menu-card">
+          <div class="menu-img" style="background-image: url('https://images.pexels.com/photos/${item.img}/pexels-photo-${item.img}.jpeg?auto=compress&cs=tinysrgb&w=300');"></div>
+          <h4>${item.name} ${item.veg ? '🌱' : ''}</h4>
+          <div style="font-size:0.85rem; color:#5a4a3e;">${item.desc}</div>
+          <div class="menu-price">${item.price}</div>
+        </div>
+      `).join('');
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderMenu(this.dataset.cat);
+      });
+    });
+    renderMenu('all');
+
+    // ---------- Smooth scroll for anchor links ----------
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === "#" || href === "") return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Ensure that if a link is clicked from mobile nav, it also closes nav and scrolls.
+    // Already handled above.
+
+    // WhatsApp number: 07086985660 -> 917086985660 (as in href)
+  })();
+</script>
+<!-- minor style adjustments -->
+<style>
+  .carousel-slide h3 { font-size: 1.6rem; font-weight: 700; }
+  .menu-card h4 { font-size: 1rem; margin: 8px 0 4px; }
+  .filter-btn { user-select: none; }
+  .whatsapp-float i { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+  .map-container iframe { border-radius: 28px; }
+  .mobile-nav { transition: opacity 0.2s; }
+  /* Additional mobile optimizations */
+  .menu-toggle:active { background: #f0d5c4; }
+  .mobile-nav a:active { background: #f7e5da; border-radius: 20px; }
+</style>
+</body>
+</html>
